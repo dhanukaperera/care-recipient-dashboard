@@ -1,5 +1,7 @@
 import * as express from 'express'
 import { pingController } from './controllers/ping'
+import { careRecipientController } from './controllers/care_recipient'
+
 import logging from './config/logging'
 import * as bodyParser from 'body-parser'
 
@@ -42,6 +44,7 @@ app.use((req, res, next) => {
 })
 
 app.use(pingController)
+app.use(careRecipientController)
 
 app.use((req, res, next) => {
   const error = new Error('Not found')
