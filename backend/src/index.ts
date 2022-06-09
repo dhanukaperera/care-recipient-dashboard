@@ -1,8 +1,14 @@
 import app from './application'
+import logging from './config/logging'
+import config from './config/config'
 
 const port = process.env.PORT || 8000
 
+const NAMESPACE = 'SERVER'
+
 app.listen(port, () => {
-  // tslint:disable-next-line:no-console
-  console.log(`Server started at http://localhost:${port}`)
+  logging.info(
+    NAMESPACE,
+    `Server is running ${config.server.hostname}:${config.server.port}`
+  )
 })
