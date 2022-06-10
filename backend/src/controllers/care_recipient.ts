@@ -4,11 +4,13 @@ import { Connect, Query } from '../config/mysql'
 
 const NAMESPACE = 'CARE_RECIPIENT'
 
-const getCareRecipientById = async (_: Request, res: Response) => {
+const getCareRecipientById = async (req: Request, res: Response) => {
   logging.info(NAMESPACE, 'Getting care recipient by id and filter by date')
 
-  const care_recipient_id = _.body?.id
-  const filter_date = _.body?.date
+  logging.info(NAMESPACE, JSON.stringify(req.query))
+
+  const care_recipient_id = req.query?.id
+  const filter_date = req.query?.date
 
   if (!care_recipient_id) {
     return res.status(400).json({
