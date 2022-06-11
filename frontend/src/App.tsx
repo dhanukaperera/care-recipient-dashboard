@@ -3,14 +3,11 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import './App.css'
 import RouteProvider from './routes/RouteProvider'
-import { useStore } from './stores/StoreContext'
 import GlobalStyles from './theme/GlobalStyles'
 import { appTheme } from './theme/theme'
+import { observer } from 'mobx-react-lite'
 
-const App: React.FC = () => {
-  const { authStore } = useStore()
-  //	authStore.initLocalStorage();
-
+const App: React.FC = observer(() => {
   return (
     <ThemeProvider theme={appTheme}>
       <GlobalStyles />
@@ -19,6 +16,6 @@ const App: React.FC = () => {
       </Router>
     </ThemeProvider>
   )
-}
+})
 
 export default App

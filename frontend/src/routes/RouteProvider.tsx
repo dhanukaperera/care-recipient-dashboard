@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite'
 import React from 'react'
 import { Route, Routes, Router, Navigate } from 'react-router-dom'
 import { routes } from '../configs/constants/routes'
@@ -6,7 +7,7 @@ import Dashboard from '../pages/Dashboard/Dashboard'
 import Login from '../pages/Login/Login'
 import { useStore } from '../stores/StoreContext'
 
-const RouteProvider = () => {
+const RouteProvider = observer(() => {
   const { authStore } = useStore()
 
   return (
@@ -36,6 +37,6 @@ const RouteProvider = () => {
       />
     </Routes>
   )
-}
+})
 
 export default RouteProvider

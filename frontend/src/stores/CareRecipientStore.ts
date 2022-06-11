@@ -1,10 +1,21 @@
+import { action, observable } from 'mobx'
+import CareRecipient from '../models/CareRecipient'
 import BaseStore from './BaseStore'
 const axios = require('axios').default
 
 class CareRecipientStore extends BaseStore {
+  @observable
+  isLoading: boolean = false
+
+  @observable
+  careRecipientList: CareRecipient[] = []
+
+  @action
   async getCareRecipientById() {
     try {
-      const r = await axios.request({
+      this.isLoading = true
+
+      const res = await axios.request({
         method: 'GET',
         url: `http://localhost:8000/getCareRecipientById`,
         headers: { 'Content-Type': 'application/json' },
@@ -14,9 +25,13 @@ class CareRecipientStore extends BaseStore {
         },
       })
 
-      console.log(r)
+      this.careRecipientList = res.data.results
+
+      console.log(this.careRecipientList)
     } catch (error) {
       console.error(error)
+    } finally {
+      this.isLoading = false
     }
   }
 }

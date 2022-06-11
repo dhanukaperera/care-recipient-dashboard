@@ -17,7 +17,7 @@ export default createGlobalStyle`
 
 	html{
 		font-size:16px;
-		background-color: #2B3D49;
+		/* background-color: #2B3D49; */
 	}
 
 	body, textarea {
@@ -25,8 +25,8 @@ export default createGlobalStyle`
 	}
 
 	body {
-		background: transparent radial-gradient(closest-side at 50% 50%, #3A586D 0%, #2B3D49 100%) 0% 0% no-repeat padding-box;
-	}
+/* 		background: transparent radial-gradient(closest-side at 50% 50%, #3A586D 0%, #2B3D49 100%) 0% 0% no-repeat padding-box;
+ */	}
 
 	a {
 		text-decoration:none;

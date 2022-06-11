@@ -1,6 +1,6 @@
 export default interface CareRecipient {
   id: string
-  timestamp?: Date
-  event_type?: string
+  timestamp: string
+  event_type: string
   payload?: string
 }
