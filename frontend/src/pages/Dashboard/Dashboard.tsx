@@ -24,7 +24,7 @@ const Dashboard: React.FC = () => {
         headers: { 'Content-Type': 'application/json' },
         params: {
           id: 'df50cac5-293c-490d-a06c-ee26796f850d',
-          date: '2019-04-25',
+          date: '2019-04-26',
         },
       })
 
