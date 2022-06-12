@@ -15,4 +15,4 @@
   publish = "build-output/"
 
   # Default build command.
-  command = "npm run build"
+  command = "yarn build"
