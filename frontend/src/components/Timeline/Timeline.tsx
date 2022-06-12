@@ -429,7 +429,8 @@ const handleColorType = (type: string) => {
 
 const TimelineStyles = styled.div`
   border-radius: 1rem;
-  margin: 2rem;
+  /*  margin: 2rem; */
+
   padding: 1rem 0;
 
   background-color: #030724;
