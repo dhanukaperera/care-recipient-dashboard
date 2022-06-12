@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import axios from 'axios'
 import Loading from '../../components/Loading/Loading'
 import CareRecipient from '../../models/CareRecipient'
-import EventInfoCard from '../../components/EventInfoCard/EventInfoCard'
 import Timeline from '../../components/Timeline/Timeline'
 
 import Calendar from 'react-calendar'
@@ -14,7 +13,6 @@ import moment from 'moment'
 const Dashboard: React.FC = () => {
   const [data, setData] = useState<CareRecipient[]>([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
 
   const [value, onChange] = useState(new Date('2019-04-23'))
 
@@ -23,10 +21,7 @@ const Dashboard: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    //getData()
-
     const d = moment(value).format('YYYY-MM-DD')
-    console.log('date ', d)
     getData()
   }, [value])
 
@@ -100,15 +95,15 @@ const DashboardStyles = styled.div`
 `
 
 const SidePanel = styled.div`
-  /*  min-width: 30vw; */
-
   display: flex;
   flex-direction: column;
   align-items: center;
+  .react-calendar__tile--active {
+    background-color: #030724;
+  }
 `
 
 const TimelinePanel = styled.div`
-  /*  width: 70vw; */
   width: 100%;
   padding: 0 2rem;
 `

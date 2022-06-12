@@ -346,7 +346,7 @@ const Timeline: React.FC<Props> = ({ data }) => {
         <tbody>
           {data.map((item, index) => {
             return (
-              <tr>
+              <tr key={index}>
                 <td>{index}</td>
                 <td> {extractTime(item.timestamp)}</td>
                 <EventTypeStyes type={item.event_type}>
