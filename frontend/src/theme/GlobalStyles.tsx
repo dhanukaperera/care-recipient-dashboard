@@ -25,6 +25,7 @@ export default createGlobalStyle`
 	}
 
 	body {
+		
 /* 		background: transparent radial-gradient(closest-side at 50% 50%, #3A586D 0%, #2B3D49 100%) 0% 0% no-repeat padding-box;
  */	}
 

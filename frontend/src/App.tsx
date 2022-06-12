@@ -21,7 +21,7 @@ const App: React.FC = () => {
   const [auth, setAuth] = useState<boolean>()
 
   useEffect(() => {
-    let user = localStorage.getItem('user')
+    const user = localStorage.getItem('user')
     user ? setAuth(true) : setAuth(false)
   }, [])
 
@@ -35,7 +35,13 @@ const App: React.FC = () => {
           {!auth && (
             <Route
               path={routes.LOGIN}
-              element={<Login authenticate={() => setAuth(true)} />}
+              element={
+                <Login
+                  authenticate={() => {
+                    setAuth(true)
+                  }}
+                />
+              }
             />
           )}
 

@@ -223,20 +223,6 @@ const Timeline: React.FC<Props> = ({ data }) => {
           </React.Fragment>
         )
 
-      case 'regular_medication_partially_taken':
-        return (
-          <React.Fragment>
-            <p>
-              <TextHighLight>Note</TextHighLight>:{' '}
-              {payloadObj?.note ?? NO_RECORD}{' '}
-            </p>
-            <p>
-              <TextHighLight>Medication Type</TextHighLight>:{' '}
-              {payloadObj?.medication_type ?? NO_RECORD}{' '}
-            </p>
-          </React.Fragment>
-        )
-
       case 'regular_medication_taken':
         return (
           <React.Fragment>
@@ -346,7 +332,7 @@ const Timeline: React.FC<Props> = ({ data }) => {
         <tbody>
           {data.map((item, index) => {
             return (
-              <tr key={index}>
+              <tr key={item.id}>
                 <td>{index}</td>
                 <td> {extractTime(item.timestamp)}</td>
                 <EventTypeStyes type={item.event_type}>
@@ -396,8 +382,6 @@ const handleColorType = (type: string) => {
       return 'background-color: #ACC2C2'
     case 'regular_medication_not_taken':
       return 'background-color: #ACC2C2'
-    case 'regular_medication_partially_taken':
-      return 'background-color: #C2BBE3'
     case 'regular_medication_taken':
       return 'background-color: #F0B5B2'
     case 'task_completed':

@@ -9,6 +9,7 @@ import Timeline from '../../components/Timeline/Timeline'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 import moment from 'moment'
+import { API_ROOT } from '../../configs/constants/app.config'
 
 const Dashboard: React.FC = () => {
   const [data, setData] = useState<CareRecipient[]>([])
@@ -16,32 +17,42 @@ const Dashboard: React.FC = () => {
 
   const [value, onChange] = useState(new Date('2019-04-23'))
 
+  const [userId, setUserId] = useState<string>()
+
   useEffect(() => {
     getData()
   }, [])
 
   useEffect(() => {
-    const d = moment(value).format('YYYY-MM-DD')
     getData()
-  }, [value])
+  }, [value, userId])
 
   const getData = async () => {
     const formatDate = moment(value).format('YYYY-MM-DD')
 
     try {
       setLoading(true)
-      const res = await axios.request({
-        method: 'GET',
-        url: `http://localhost:8000/getCareRecipientById`,
-        headers: { 'Content-Type': 'application/json' },
-        params: {
-          id: 'df50cac5-293c-490d-a06c-ee26796f850d',
-          date: formatDate,
-        },
-      })
 
-      if (res) {
-        setData(res.data.results)
+      if (userId) {
+        const res = await axios.request({
+          method: 'GET',
+          url: API_ROOT,
+          headers: { 'Content-Type': 'application/json' },
+          params: {
+            id: userId,
+            date: formatDate,
+          },
+        })
+
+        if (res) {
+          setData(res.data.results)
+        }
+      } else {
+        const user = await localStorage.getItem('user')
+
+        if (user) {
+          setUserId(user)
+        }
       }
     } catch (e) {
       console.log(e)
@@ -60,9 +71,12 @@ const Dashboard: React.FC = () => {
             <h2>
               Timeline for the date : {moment(value).format('YYYY-MM-DD')}
             </h2>
-            {data.length == 0 ? (
+            {data.length === 0 ? (
               <ImageCardStyles>
-                <img src={require('../../assets/no-data.svg').default} />
+                <img
+                  alt="No data found"
+                  src={require('../../assets/no-data.svg').default}
+                />
                 <h1>No Records Found!</h1>
               </ImageCardStyles>
             ) : (
@@ -75,6 +89,12 @@ const Dashboard: React.FC = () => {
       <SidePanel>
         <h2>Select Date</h2>
         <Calendar onChange={onChange} value={value} />
+
+        <div>
+          <h3>Care Recipient ID</h3>
+
+          <p>{userId}</p>
+        </div>
       </SidePanel>
     </DashboardStyles>
   )
@@ -85,7 +105,6 @@ const DashboardStyles = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  overflow: auto;
 
   h2 {
     margin: 1rem;
@@ -98,8 +117,13 @@ const SidePanel = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   .react-calendar__tile--active {
     background-color: #030724;
+  }
+
+  h3 {
+    padding: 1rem 0;
   }
 `
 
